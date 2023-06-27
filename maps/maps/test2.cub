@@ -1,0 +1,15 @@
+NO	  ./maps/textures/no.xpm
+SO   ./maps/textures/so.xpm
+WE   ./maps/textures/we.xpm
+EA   ./maps/textures/ea.xpm
+
+F      ,120,255,255
+C      10,200,89
+
+
+11111111111
+10000001101
+10000001101
+10000001101
+11110001111
+11111111111
