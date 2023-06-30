@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 19:57:34 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/28 00:11:44 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/28 05:55:44 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	check_map(t_game *g)
 	if (player_is_valid(&g->prs, 0, -1))
 		return (1);
 	if (map_is_close(&g->prs, 0, -1))
+		return (1);
+	if (clean_map_line(g, -1, 0))
 		return (1);
 	return (0);
 }

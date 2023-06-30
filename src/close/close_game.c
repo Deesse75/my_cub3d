@@ -6,45 +6,37 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 08:58:28 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/27 15:20:15 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 08:14:34 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_xpm(t_xpm *tx)
+static void	free_parse(t_parse *prs)
 {
-	free(tx->addr);
-	free(tx->img);
-	free(tx->name);
-	free(tx->tex);
+	if (prs->line)
+		free(prs->line);
+	if (prs->buff)
+		free(prs->buff);
+	if (prs->no)
+		free(prs->no);
+	if (prs->so)
+		free(prs->so);
+	if (prs->we)
+		free(prs->we);
+	if (prs->ea)
+		free(prs->ea);
+	if (prs->file)
+		free_strs(prs->file);
+	if (prs->tmp)
+		free_strs(prs->tmp);
+	if (prs->map)
+		free_strs(prs->map);
+	if (prs->color)
+		free(prs->color);
 }
 
-void	free_parse(t_parse *p)
-{
-	if (p->line)
-		free(p->line);
-	if (p->buff)
-		free(p->buff);
-	if (p->no)
-		free(p->no);
-	if (p->so)
-		free(p->so);
-	if (p->we)
-		free(p->we);
-	if (p->ea)
-		free(p->ea);
-	if (p->file)
-		free_strs(p->file);
-	if (p->tmp)
-		free_strs(p->tmp);
-	if (p->map)
-		free_strs(p->map);
-	if (p->color)
-		free(p->color);
-}
-
-void	free_win(t_win *mlx)
+static void	free_win(t_win *mlx)
 {
 	if (mlx->win)
 		mlx_destroy_window(mlx->ptr, mlx->win);
@@ -55,18 +47,26 @@ void	free_win(t_win *mlx)
 	}
 }
 
+static void	destroy_img(t_game *g)
+{
+	if (g->no.img)
+		mlx_destroy_image(g->mlx.ptr, g->no.img);
+	if (g->so.img)
+		mlx_destroy_image(g->mlx.ptr, g->so.img);
+	if (g->we.img)
+		mlx_destroy_image(g->mlx.ptr, g->we.img);
+	if (g->ea.img)
+		mlx_destroy_image(g->mlx.ptr, g->ea.img);
+	if (g->sc.img && g->state == 2)
+		mlx_destroy_image(g->mlx.ptr, g->sc.img);
+}
+
 void	close_game(t_game *g)
 {
 	if (g->prs.state)
 		free_parse(&g->prs);
-	if (g->no.state)
-		free_xpm(&g->no);
-	if (g->so.state)
-		free_xpm(&g->so);
-	if (g->we.state)
-		free_xpm(&g->we);
-	if (g->ea.state)
-		free_xpm(&g->ea);
+	if (g->state)
+		destroy_img(g);
 	if (g->mlx.state)
 		free_win(&g->mlx);
 	exit(EXIT_SUCCESS);

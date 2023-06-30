@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 07:03:19 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/27 15:34:03 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 07:29:21 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ typedef struct s_player{
 	double	plane_y;
 }t_player;
 
+typedef struct s_data{
+	int		*text;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		len;
+	int		endian;
+	int		h;
+	int		w;
+}t_data;
+
 typedef struct s_ray{
 	double	ray_x;
 	double	ray_y;
@@ -56,6 +67,9 @@ typedef struct s_ray{
 	double	delta_x;
 	double	delta_y;
 	double	perpwalldist;
+	double	wallx;
+	int		*texture;
+	int		texnum;
 	int		map_x;
 	int		map_y;
 	int		step_x;
@@ -64,19 +78,6 @@ typedef struct s_ray{
 	int		hit;
 	int		side;
 }t_ray;
-
-typedef struct s_xpm{
-	int		state;
-	void	*img;
-	void	*tex;
-	char	*name;
-	char	*addr;
-	int		bpp;
-	int		len;
-	int		endian;
-	int		h;
-	int		w;
-}t_xpm;
 
 typedef struct s_win{
 	int		state;
@@ -87,14 +88,16 @@ typedef struct s_win{
 }t_win;
 
 typedef struct s_game{
+	int			state;
 	t_win		mlx;
 	t_parse		prs;
 	t_player	pt;
 	t_ray		rx;
-	t_xpm		no;
-	t_xpm		so;
-	t_xpm		ea;
-	t_xpm		we;
+	t_data		no;
+	t_data		so;
+	t_data		ea;
+	t_data		we;
+	t_data		sc;
 }t_game;
 
 #endif

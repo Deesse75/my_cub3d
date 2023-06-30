@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:05:33 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/27 12:20:53 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/29 03:27:28 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ static int	add_line(t_parse *prs)
 
 int	copy_file(t_parse *prs, char *file, int ret)
 {
-	if (init_parse(prs))
-		return (1);
 	prs->fd = open(file, O_RDONLY);
 	if (prs->fd < 0)
 		return (perror(NULL), 1);

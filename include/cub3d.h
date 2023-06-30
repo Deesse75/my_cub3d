@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 07:00:24 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/28 00:53:07 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 08:30:08 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,18 @@
 
 int		check_argv(int ac, char **av);
 void	close_game(t_game *g);
-void	free_win(t_win *mlx);
-void	free_parse(t_parse *p);
-void	free_xpm(t_xpm *tx);
 int		copy_file(t_parse *prs, char *file, int ret);
-int		init_parse(t_parse *prs);
 int		parse_param(t_game *g, int i, char *tp);
 int		fill_color_param(t_parse *prs, char *tp);
 int		fill_texture_param(t_parse *prs, char *tex, char *tp);
 int		parse_map(t_game *g, int i);
 int		check_map(t_game *g);
-void	init_win(t_win *mlx);
 int		init_game(t_game *g);
+int		init_texture(t_game *g);
+void	init_data(t_data *dt);
+void	init_player(t_game *g);
+void	game_param(t_game *g, int i, int line_up, int line_down);
+void	draw_map(t_game *g, int line_up, int line_down, int col);
+int		clean_map_line(t_game *g, int i, int size);
 
-# endif
+#endif
