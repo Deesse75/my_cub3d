@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 04:33:07 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/30 08:28:40 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 11:18:34 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ static void	draw_texture(t_game *g, int col)
 	y = -((int)(g->mlx.h / g->rx.perpwalldist)) / 2 + g->mlx.h / 2;
 	if (y < 0)
 		y = 0;
-	step = 1.0 * 64 / ((int)(g->mlx.h / g->rx.perpwalldist));
+	step = 1.0 * g->t_size / ((int)(g->mlx.h / g->rx.perpwalldist));
 	tex_pos = (y - (int)g->mlx.h / 2 + (
 				(int)(g->mlx.h / g->rx.perpwalldist)) / 2) * step;
 	while (y < (((int)(g->mlx.h / g->rx.perpwalldist)) / 2 + g->mlx.h / 2))
 	{
 		dst = g->sc.addr + (y * g->sc.len + col * (g->sc.bpp / 8));
-		tex_y = (int)tex_pos & (64 - 1);
+		tex_y = (int)tex_pos & (g->t_size - 1);
 		tex_pos += step;
-		*(unsigned int *)dst = *(g->rx.texture + 64 * tex_y + g->rx.texnum);
+		*(unsigned int *)dst = *(g->texture + g->t_size * tex_y + g->rx.texnum);
 		y++;
 		if (y == g->mlx.h)
 			return ;

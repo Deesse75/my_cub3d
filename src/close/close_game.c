@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 08:58:28 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/30 08:14:34 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:20:43 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ static void	destroy_img(t_game *g)
 
 void	close_game(t_game *g)
 {
-	if (g->prs.state)
-		free_parse(&g->prs);
-	if (g->state)
-		destroy_img(g);
-	if (g->mlx.state)
-		free_win(&g->mlx);
+	free_parse(&g->prs);
+	destroy_img(g);
+	free_win(&g->mlx);
 	exit(EXIT_SUCCESS);
 }

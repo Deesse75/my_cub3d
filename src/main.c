@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 07:22:54 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/30 08:23:54 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:34:35 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static int	init_g(t_game *g)
 	g->ea = (t_data){0};
 	if (init_parse(&g->prs))
 		return (1);
-	g->mlx.h = 900;
-	g->mlx.w = 1200;
+	g->mlx.h = 700;
+	g->mlx.w = 1000;
 	return (0);
 }
 

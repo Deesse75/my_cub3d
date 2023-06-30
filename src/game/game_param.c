@@ -6,39 +6,35 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 03:54:50 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/30 08:29:34 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:01:59 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	wall_len(t_game *g, int *line_up, int *line_down)
+static void	wall_len(t_game *g)
 {
 	if (g->rx.side == 0)
 	{
 		if (g->rx.map_x < g->pt.x)
-			g->rx.texture = g->no.text;
+			g->texture = g->no.text;
 		else
-			g->rx.texture = g->so.text;
+			g->texture = g->so.text;
 		g->rx.perpwalldist = g->rx.side_x - g->rx.delta_x;
 		g->rx.wallx = g->pt.y + g->rx.perpwalldist * g->rx.ray_y;
 	}
 	else
 	{
 		if (g->rx.map_y < g->pt.y)
-			g->rx.texture = g->we.text;
+			g->texture = g->we.text;
 		else
-			g->rx.texture = g->ea.text;
+			g->texture = g->ea.text;
 		g->rx.perpwalldist = g->rx.side_y - g->rx.delta_y;
 		g->rx.wallx = g->pt.x + g->rx.perpwalldist * g->rx.ray_x;
 	}
+	g->rx.wallx -= floor((g->rx.wallx));
 	g->rx.line_h = (int)(g->mlx.h / g->rx.perpwalldist);
-	*line_up = (-1 * g->rx.line_h) / 2 + g->mlx.h / 2;
-	if (*line_up < 0 || *line_up >= g->mlx.h)
-		*line_up = 0;
-	*line_down = g->rx.line_h / 2 + g->mlx.h / 2;
-	if (*line_down >= g->mlx.h || *line_down < 0)
-		*line_down = g->mlx.h - 1;
+	g->rx.texnum = (int)(g->rx.wallx * (double)g->t_size);
 }
 
 static void	hit_wall(t_game *g)
@@ -105,11 +101,17 @@ void	game_param(t_game *g, int i, int line_up, int line_down)
 		get_ray(g);
 		get_dist(g);
 		hit_wall(g);
-		wall_len(g, &line_up, &line_down);
-		g->rx.texnum = (int)(g->rx.wallx * 64.0);
+		wall_len(g);
+		line_up = (-1 * g->rx.line_h) / 2 + g->mlx.h / 2;
+		if (line_up < 0 || line_up >= g->mlx.h)
+			line_up = 0;
+		line_down = g->rx.line_h / 2 + g->mlx.h / 2;
+		if (line_down >= g->mlx.h || line_down < 0)
+			line_down = g->mlx.h - 1;
 		if ((g->rx.side == 0 && g->rx.ray_x > 0)
 			|| (g->rx.side == 1 && g->rx.ray_y < 0))
-			g->rx.texnum = 64 - g->rx.texnum - 1;
+			g->rx.texnum = g->t_size - g->rx.texnum - 1;
 		draw_map(g, line_up, line_down, i);
+		check_move(g);
 	}
 }

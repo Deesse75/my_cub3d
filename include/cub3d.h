@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 07:00:24 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/30 08:30:08 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:02:30 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,8 @@ void	init_player(t_game *g);
 void	game_param(t_game *g, int i, int line_up, int line_down);
 void	draw_map(t_game *g, int line_up, int line_down, int col);
 int		clean_map_line(t_game *g, int i, int size);
+void	check_move(t_game *g);
+void	rotateright(t_game *g);
+void	rotateleft(t_game *g);
 
 #endif

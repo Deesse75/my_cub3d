@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 01:06:22 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/30 08:29:50 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:26:06 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	check_size_texture(t_game *g)
 		return (write(2, "Error.\nInvalid size texture file EA.\n", 37));
 	if (g->we.h != 64 || g->we.w != 64)
 		return (write(2, "Error.\nInvalid size texture file WE.\n", 37));
+	g->t_size = 64;
 	return (0);
 }
 

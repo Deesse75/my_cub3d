@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 07:03:19 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/30 07:29:21 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 16:49:20 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ typedef struct s_player{
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	int		left;
+	int		right;
+	int		forward;
+	int		backwards;
+	int		rotleft;
+	int		rotright;
 }t_player;
 
 typedef struct s_data{
@@ -57,6 +63,7 @@ typedef struct s_data{
 	int		endian;
 	int		h;
 	int		w;
+	int		on;
 }t_data;
 
 typedef struct s_ray{
@@ -68,7 +75,6 @@ typedef struct s_ray{
 	double	delta_y;
 	double	perpwalldist;
 	double	wallx;
-	int		*texture;
 	int		texnum;
 	int		map_x;
 	int		map_y;
@@ -92,12 +98,15 @@ typedef struct s_game{
 	t_win		mlx;
 	t_parse		prs;
 	t_player	pt;
+	int			*texture;
+	int			t_size;
 	t_ray		rx;
 	t_data		no;
 	t_data		so;
 	t_data		ea;
 	t_data		we;
 	t_data		sc;
+	t_data		mp;
 }t_game;
 
 #endif

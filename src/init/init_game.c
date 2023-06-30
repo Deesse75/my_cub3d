@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 21:03:05 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/30 08:16:14 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:20:10 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,37 @@ static int	quit(t_game *g)
 
 static int	keypress(int key, t_game *g)
 {
-	if (key == 65307 || key == 113)
+	if (key == 97)
+		g->pt.left = 1;
+	else if (key == 100)
+		g->pt.right = 1;
+	else if (key == 119)
+		g->pt.forward = 1;
+	else if (key == 115)
+		g->pt.backwards = 1;
+	else if (key == 65361)
+		g->pt.rotleft = 1;
+	else if (key == 65363)
+		g->pt.rotright = 1;
+	else if (key == 65307)
 		close_game(g);
+	return (0);
+}
+
+int	key_released(int key, t_game *g)
+{
+	if (key == 97)
+		g->pt.left = 0;
+	if (key == 100)
+		g->pt.right = 0;
+	if (key == 119)
+		g->pt.forward = 0;
+	if (key == 115)
+		g->pt.backwards = 0;
+	if (key == 65361)
+		g->pt.rotleft = 0;
+	if (key == 65363)
+		g->pt.rotright = 0;
 	return (0);
 }
 
@@ -50,6 +79,7 @@ int	init_game(t_game *g)
 	if (!g->mlx.win)
 		return (write(2, "Error.\nEchec mlx_new_window().\n", 31), 1);
 	mlx_hook(g->mlx.win, 2, 1L << 0, keypress, g);
+	mlx_key_hook(g->mlx.win, key_released, g);
 	mlx_hook(g->mlx.win, 17, 1L << 0, quit, g);
 	mlx_loop_hook(g->mlx.ptr, play_cub, g);
 	mlx_loop(g->mlx.ptr);

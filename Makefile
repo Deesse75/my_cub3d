@@ -6,12 +6,12 @@ SRC = src/main.c\
 	src/init/init_game.c src/init/init_texture.c src/init/init_player.c \
 	src/parse/check_argv.c src/parse/copy_file.c src/parse/parse_param.c src/parse/fill_color_param.c\
 	src/parse/fill_texture_param.c src/parse/parse_map.c src/parse/check_map.c src/parse/clean_map.c\
-	src/game/game_param.c src/game/draw_map.c
+	src/game/game_param.c src/game/draw_map.c src/game/check_move.c src/game/check_rot.c
 OBJ = $(SRC:.c=.o)
 LIB = ./libft/libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
-CMLX = -Iminilibx/ -Lminilibx/ -lmlx_Linux -lmlx -lXext -lX11
+CMLX = -Iminilibx/ -Lminilibx/ -lmlx_Linux -lmlx -lXext -lX11 -lm
 
 all: $(NAME)
 
