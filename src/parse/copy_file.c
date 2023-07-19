@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:05:33 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/29 03:27:28 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:48:30 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 static int	supp_back_n(t_parse *prs, int i, char *tp)
 {
-	while (prs->file[++i])
+	while (prs->file && prs->file[++i])
 	{
 		tp = ft_strtrim(prs->file[i], "\n");
 		if (!tp)
 			return (perror("Malloc() supp_back_n() "), 1);
 		free(prs->file[i]);
-		prs->file[i] = ft_strdup(tp);
-		free(tp);
+		prs->file[i] = tp;
 		tp = NULL;
 		if (!prs->file)
 			return (perror("Malloc() supp_back_n() "), 1);
@@ -99,6 +98,9 @@ int	copy_file(t_parse *prs, char *file, int ret)
 		free(prs->line);
 		prs->line = NULL;
 	}
+	close(prs->fd);
+	if (!prs->file)
+		return (write(2, "Error\n Malloc() copy_file()\n", 28), 1);
 	if (supp_back_n(prs, -1, NULL))
 		return (1);
 	return (0);

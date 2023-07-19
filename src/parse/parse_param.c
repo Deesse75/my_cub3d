@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 10:33:18 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/27 21:41:35 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:52:16 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,30 @@ static int	select_param(t_parse *prs, char *tex)
 	return (0);
 }
 
-int	parse_param(t_game *g, int i, char *tex)
+int	parse_param(t_parse *prs, int i, char *tex)
 {
-	while (g->prs.file[++i])
+	while (prs->file[++i])
 	{
-		tex = ft_strtrim(g->prs.file[i], " ");
+		tex = ft_strtrim(prs->file[i], " ");
 		if (!tex)
 			return (perror("Malloc() parse_param() "), 1);
-		if (!tex[0] && g->prs.file[i][0])
-			return (write(2, "Error.\nInvalid whitespace line.\n", 32));
+		if (!tex[0] && prs->file[i][0])
+			return (free(tex),
+				write(2, "Error.\nInvalid whitespace line.\n", 32));
 		if (tex[0])
 		{
-			if (select_param(&g->prs, tex))
+			if (select_param(prs, tex))
 				return (free(tex), 1);
 			free(tex);
 			tex = NULL;
-			if (++g->prs.index == 6)
+			if (++prs->index == 6)
 				break ;
 		}
 		free(tex);
 	}
-	g->prs.size = i;
-	if (!g->prs.no || !g->prs.so || !g->prs.we || !g->prs.ea
-		|| g->prs.ceiling == -1 || g->prs.floor == -1)
+	prs->size = i;
+	if (!prs->no || !prs->so || !prs->we || !prs->ea
+		|| prs->ceiling == -1 || prs->floor == -1)
 		return (write(2, "Error.\nNumber of parameters invalid\n", 36));
 	return (0);
 }

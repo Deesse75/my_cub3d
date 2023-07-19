@@ -6,13 +6,13 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 08:58:28 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/30 17:20:43 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:11:54 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	free_parse(t_parse *prs)
+void	free_parse(t_parse *prs)
 {
 	if (prs->line)
 		free(prs->line);

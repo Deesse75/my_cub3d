@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 07:03:19 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/30 16:49:20 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:58:16 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_parse{
 	int		*color;
 	char	**map;
 	int		size;
+	int		size_line;
 	int		index;
 	int		player;
 	int		fd;

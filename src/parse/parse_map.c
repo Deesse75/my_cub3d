@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:04:17 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/28 00:11:55 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:51:16 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,27 @@ static int	add_line(t_parse *prs, char *line)
 	return (0);
 }
 
-int	parse_map(t_game *g, int i)
+int	parse_map(t_parse *prs)
 {
-	i = g->prs.size + 1;
-	g->prs.size = -1;
-	while (g->prs.file[i] && !g->prs.file[i][0])
+	int	i;
+
+	i = prs->size + 1;
+	prs->size = -1;
+	while (prs->file[i] && !prs->file[i][0])
 		i++;
-	if (!g->prs.file[i])
+	if (!prs->file[i])
 		return (write(2, "Error.\nMap is missing.\n", 23));
-	while (g->prs.file[i] && g->prs.file[i][0])
+	while (prs->file[i] && prs->file[i][0])
 	{
-		if (add_line(&g->prs, g->prs.file[i]))
+		if (add_line(prs, prs->file[i]))
 			return (1);
 		i++;
 	}
-	while (g->prs.file[i] && !g->prs.file[i][0])
+	while (prs->file[i] && !prs->file[i][0])
 		i++;
-	if (g->prs.file[i])
+	if (prs->file[i])
 		return (write(2, "Error.\nEmpty line in map.\n", 26));
-	if (check_map(g))
+	if (check_map(prs))
 		return (1);
 	return (0);
 }

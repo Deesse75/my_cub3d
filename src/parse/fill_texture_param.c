@@ -6,7 +6,7 @@
 /*   By: sadorlin <sadorlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:08:22 by sadorlin          #+#    #+#             */
-/*   Updated: 2023/06/27 16:58:41 by sadorlin         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:50:08 by sadorlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	check_texture_file(t_parse *prs, char *file)
 	size = read(prs->fd, buff, 2);
 	close(prs->fd);
 	if (size < 0)
-		return (write(2, "Error.\nFile unreadable.\n", 24));
+		return (write(2, "Error.\nTexture file unreadable.\n", 32));
 	if (size == 0)
-		return (write(2, "Error.\nFile empty.\n", 19));
+		return (write(2, "Error.\nTexture file empty.\n", 27));
 	return (0);
 }
 
